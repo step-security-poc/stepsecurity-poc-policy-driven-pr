@@ -10,4 +10,10 @@ For the purpose of testing this in a POC, you can choose to turn this on for you
 
 ## Testing Controls 
 
-This Repository contains a workflow with low scoring actions. 
+* This Repository contains a workflow with low scoring actions. You can copy the workflow file in your own repository for testing. It may take up to 1 hour for the actions to reflect in the StepSecurity dashboard
+* Enable Policy Driven PR's from the StepSecurity dashboard under the `Policy Driven PR's` section
+  1)  Select which controls you want to apply for the policy
+  2) Select which repositories you want the policy to apply to (for testing purposes, you can select just your test repository)
+  3) Once you enable `Replace third-party actions with StepSecurity maintained actions`, you will be prompted to select which actions to replace. Select any available maintained actions. If none are showing, you may need to wait up to 1 hour from when you copied/ran the workflow
+* Once you save the policy, it will do a scan within ~15 minutes, and open a PR to apply fixes based on the controls you selected. From here, it will do a daily scan to address misconfigurations. 
+

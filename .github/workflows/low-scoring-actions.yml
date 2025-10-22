@@ -1,0 +1,21 @@
+name: low scoring actions
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  low-scoring-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wandalen/wretry.action@master
+        with:
+          attempt_limit: 3
+          command: echo "This might fail"
+
+      - uses: madhead/semver-utils@latest
+        id: version
+        with:
+          version: 1.2.3
+
+      - uses: ethanis/nitpicker@v1
+

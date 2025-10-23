@@ -1,16 +1,26 @@
 # Policy Driven PR's – Automating Fixes with Pull Requests 
  
-Policy Driven PR's allow you to automate security remediation across your repositories by either automatically generating Pull Requests to fix issues or creating GitHub Issues to track vulnerabilities. For more information, see [here](https://docs.stepsecurity.io/orchestrate-security/policy-driven-prs) 
+Policy Driven PR's allow you to automate security remediation across your repositories by automatically generating Pull Requests to fix issues or creating GitHub Issues to track vulnerabilities. For more information, see [here](https://docs.stepsecurity.io/orchestrate-security/policy-driven-prs) 
 
-## How it works
+## Supported Controls
+This feature allows you to automatically fix and align with the following controls:
 
-Policy Driven PR's allow you to define specific controls and best practices to automate via pull requests. This can be enabled from the StepSecurity dashboard under `Orchestrate Security -> Policy Driven PR's`. The policy can be applied to individually to repositories, or all repositories. 
-
-For the purpose of testing this in a POC, you can choose to turn this on for your own internal repositories, or use this repository as a reference
+* **Harden GitHub-Hosted Runner**: Ensures Harden-Runner is installed on GitHub-hosted runners. Often used to deploy harden-runner at scale
+* **Pin Actions to Full-Length Commit SHA**: Pin actions to full-length commit SHAs to follow best security practices
+* **Restrict GitHub Token Permissions**: Restrict default GitHub token permissions to minimal required permissions 
+* **Pin image tags to digests in Dockerfiles**: Docker tags are mutable, so use digests in place of tags when pulling images
+* **Replace third party actions with StepSecurity maintained actions**: Use secure, audited GitHub actions maintained by StepSecurity to reduce supply chain risks
+* **Update Dependabot configuration**: Manage Dependabot configuration to help keep dependency versions up to date 
+* **Update the pre-commit configuration**: Pre-commit hooks are useful for enforcing code quality, code formatting, and detecting security vulnerabilities.
+* **Add GitHub Actions from the Workflows Templates**: Add workflows that are part of the organization's recommended set and were previously missing from the repository
 
 ## Testing Controls 
 
-* This Repository contains a workflow with low scoring actions. You can copy the workflow file in your own repository for testing. It may take up to 1 hour for the actions to reflect in the StepSecurity dashboard
+Policy Driven PR's can be applied on a repo by repo basis or across your entire organization. It can be enabled from the StepSecurity dashboard under `Orchestrate Security -> Policy Driven PR's`. Once enabled, daily scans will check for misconfigurations based on the selected controls and automatically create a pull request if any are found
+
+To test this feature, the quickest way to get started is to use an existing repository within your organization, or create a test repository. This repository contains workflows and configurations that will fail the controls above (ie; replacing action with maintained action, adding dependabot configuration) - prompting a PR to be opened to fix the issues. 
+
+* You can use the [workflow file](https://github.com/stepsecurity-poc/stepsecurity-poc-policy-driven-pr/blob/main/.github/workflows/misconfigured.yml) in your own repository for testing. It may take up to 1 hour for the actions to reflect in the StepSecurity dashboard
 * Enable Policy Driven PR's from the StepSecurity dashboard under the `Policy Driven PR's` section
   1)  Select which controls you want to apply for the policy
   2) Select which repositories you want the policy to apply to (for testing purposes, you can select just your test repository)

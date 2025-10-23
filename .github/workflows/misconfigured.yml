@@ -1,4 +1,4 @@
-name: low scoring actions
+name: misconfigured-workflow
 
 on: 
   workflow_dispatch:
